@@ -16,6 +16,12 @@
 @implementation AppDelegate
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification{
+    
+    for (NSUserNotification *n in [center deliveredNotifications]) {
+        if ([n.userInfo[@"url"] isEqualToString:notification.userInfo[@"url"]]) {
+            return NO;
+        }
+    }
     return YES;
 }
 -(void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification {
