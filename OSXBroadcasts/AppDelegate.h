@@ -12,7 +12,6 @@
 @property (strong, nonatomic) NSStatusItem *statusItem;
 @property (strong, nonatomic) NSMenu *sysBarMenu;
 @property (strong, nonatomic) NSMenuItem *authItem;
-@property (strong, nonatomic) NSMenuItem *deauthItem;
 @property (strong, nonatomic) NSMenuItem *quitItem;
 @property (strong, nonatomic) NSMenuItem *donateItem;
 

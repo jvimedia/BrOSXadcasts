@@ -35,12 +35,12 @@
 		505FE7A9198B976000B0B349 /* SysBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SysBar.png; sourceTree = "<group>"; };
 		505FE7AB198B984600B0B349 /* SysBar-invert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SysBar-invert@2x.png"; sourceTree = "<group>"; };
 		505FE7AC198B984600B0B349 /* SysBar-invert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SysBar-invert.png"; sourceTree = "<group>"; };
-		50E57497198ABDAD008D35B8 /* OSXBroadcasts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = OSXBroadcasts.app; path = /Users/max/Documents/iDev/OSXBroadcasts/build/Debug/OSXBroadcasts.app; sourceTree = "<absolute>"; };
+		50B8E02B198D06680050E854 /* BrOSXadcasts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrOSXadcasts.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50B8E02C198D06680050E854 /* BrOSXadcastsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrOSXadcastsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50E5749B198ABDAD008D35B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50E5749C198ABDAD008D35B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		50E5749E198ABDAD008D35B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		50E5749F198ABDAD008D35B8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		50E574AA198ABDAD008D35B8 /* OSXBroadcastsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = OSXBroadcastsTests.xctest; path = /Users/max/Documents/iDev/OSXBroadcasts/build/Debug/OSXBroadcastsTests.xctest; sourceTree = "<absolute>"; };
 		50E574AF198ABDAD008D35B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50E574B0198ABDAD008D35B8 /* OSXBroadcastsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OSXBroadcastsTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,6 +68,8 @@
 			children = (
 				50E57499198ABDAD008D35B8 /* OSXBroadcasts */,
 				50E574AD198ABDAD008D35B8 /* OSXBroadcastsTests */,
+				50B8E02B198D06680050E854 /* BrOSXadcasts.app */,
+				50B8E02C198D06680050E854 /* BrOSXadcastsTests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,9 +118,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		50E57496198ABDAD008D35B8 /* OSXBroadcasts */ = {
+		50E57496198ABDAD008D35B8 /* BrOSXadcasts */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50E574B4198ABDAD008D35B8 /* Build configuration list for PBXNativeTarget "OSXBroadcasts" */;
+			buildConfigurationList = 50E574B4198ABDAD008D35B8 /* Build configuration list for PBXNativeTarget "BrOSXadcasts" */;
 			buildPhases = (
 				50E57493198ABDAD008D35B8 /* Sources */,
 				50E57494198ABDAD008D35B8 /* Frameworks */,
@@ -128,14 +130,14 @@
 			);
 			dependencies = (
 			);
-			name = OSXBroadcasts;
+			name = BrOSXadcasts;
 			productName = OSXBroadcasts;
-			productReference = 50E57497198ABDAD008D35B8 /* OSXBroadcasts.app */;
+			productReference = 50B8E02B198D06680050E854 /* BrOSXadcasts.app */;
 			productType = "com.apple.product-type.application";
 		};
-		50E574A9198ABDAD008D35B8 /* OSXBroadcastsTests */ = {
+		50E574A9198ABDAD008D35B8 /* BrOSXadcastsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 50E574B7198ABDAD008D35B8 /* Build configuration list for PBXNativeTarget "OSXBroadcastsTests" */;
+			buildConfigurationList = 50E574B7198ABDAD008D35B8 /* Build configuration list for PBXNativeTarget "BrOSXadcastsTests" */;
 			buildPhases = (
 				50E574A6198ABDAD008D35B8 /* Sources */,
 				50E574A7198ABDAD008D35B8 /* Frameworks */,
@@ -146,9 +148,9 @@
 			dependencies = (
 				50E574AC198ABDAD008D35B8 /* PBXTargetDependency */,
 			);
-			name = OSXBroadcastsTests;
+			name = BrOSXadcastsTests;
 			productName = OSXBroadcastsTests;
-			productReference = 50E574AA198ABDAD008D35B8 /* OSXBroadcastsTests.xctest */;
+			productReference = 50B8E02C198D06680050E854 /* BrOSXadcastsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -169,7 +171,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 50E57492198ABDAD008D35B8 /* Build configuration list for PBXProject "OSXBroadcasts" */;
+			buildConfigurationList = 50E57492198ABDAD008D35B8 /* Build configuration list for PBXProject "BrOSXadcasts" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -182,8 +184,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				50E57496198ABDAD008D35B8 /* OSXBroadcasts */,
-				50E574A9198ABDAD008D35B8 /* OSXBroadcastsTests */,
+				50E57496198ABDAD008D35B8 /* BrOSXadcasts */,
+				50E574A9198ABDAD008D35B8 /* BrOSXadcastsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -234,7 +236,7 @@
 /* Begin PBXTargetDependency section */
 		50E574AC198ABDAD008D35B8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 50E57496198ABDAD008D35B8 /* OSXBroadcasts */;
+			target = 50E57496198ABDAD008D35B8 /* BrOSXadcasts */;
 			targetProxy = 50E574AB198ABDAD008D35B8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -334,7 +336,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = OSXBroadcasts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = OSXBroadcasts;
+				PRODUCT_NAME = BrOSXadcasts;
 			};
 			name = Debug;
 		};
@@ -345,7 +347,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = OSXBroadcasts/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = OSXBroadcasts;
+				PRODUCT_NAME = BrOSXadcasts;
 			};
 			name = Release;
 		};
@@ -364,7 +366,7 @@
 				);
 				INFOPLIST_FILE = OSXBroadcastsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = OSXBroadcastsTests;
+				PRODUCT_NAME = BrOSXadcastsTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -380,7 +382,7 @@
 				);
 				INFOPLIST_FILE = OSXBroadcastsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = OSXBroadcastsTests;
+				PRODUCT_NAME = BrOSXadcastsTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -388,7 +390,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		50E57492198ABDAD008D35B8 /* Build configuration list for PBXProject "OSXBroadcasts" */ = {
+		50E57492198ABDAD008D35B8 /* Build configuration list for PBXProject "BrOSXadcasts" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50E574B2198ABDAD008D35B8 /* Debug */,
@@ -397,7 +399,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50E574B4198ABDAD008D35B8 /* Build configuration list for PBXNativeTarget "OSXBroadcasts" */ = {
+		50E574B4198ABDAD008D35B8 /* Build configuration list for PBXNativeTarget "BrOSXadcasts" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50E574B5198ABDAD008D35B8 /* Debug */,
@@ -406,7 +408,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		50E574B7198ABDAD008D35B8 /* Build configuration list for PBXNativeTarget "OSXBroadcastsTests" */ = {
+		50E574B7198ABDAD008D35B8 /* Build configuration list for PBXNativeTarget "BrOSXadcastsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				50E574B8198ABDAD008D35B8 /* Debug */,

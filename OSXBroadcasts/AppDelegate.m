@@ -17,9 +17,10 @@
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification{
     
+    NSLog(@"New URL: %@", notification.userInfo[@"url"]);
     for (NSUserNotification *n in [center deliveredNotifications]) {
         if ([n.userInfo[@"url"] isEqualToString:notification.userInfo[@"url"]]) {
-            return NO;
+            return NO; //For some reason this won't work. It returns no but the notification will still display.
         }
     }
     return YES;
@@ -38,16 +39,15 @@
     self.statusItem.image = [NSImage imageNamed:@"SysBar"];
     self.statusItem.alternateImage = [NSImage imageNamed:@"SysBar-invert"];
     self.sysBarMenu = [[NSMenu alloc] init];
-    self.authItem = [[NSMenuItem alloc] initWithTitle:@"Authorize" action:@selector(authorize) keyEquivalent:@""];
-    self.deauthItem = [[NSMenuItem alloc] initWithTitle:@"Deauthorize" action:@selector(deauthorize) keyEquivalent:@""];
     self.quitItem = [[NSMenuItem alloc] initWithTitle:@"Quit" action:@selector(quit) keyEquivalent:@""];
     self.donateItem = [[NSMenuItem alloc] initWithTitle:@"Donate" action:@selector(donate) keyEquivalent:@""];
     if (self.user_token == nil) {
-        [self.sysBarMenu addItem:self.authItem];
+        self.authItem = [[NSMenuItem alloc] initWithTitle:@"Authorize" action:@selector(authorize) keyEquivalent:@""];
     } else {
-        [self.sysBarMenu addItem:self.deauthItem];
+        self.authItem = [[NSMenuItem alloc] initWithTitle:@"Deauthorize" action:@selector(deauthorize) keyEquivalent:@""];
         [self loadChannels];
     }
+    [self.sysBarMenu addItem:self.authItem];
     [self.sysBarMenu addItem:[NSMenuItem separatorItem]];
     [self.sysBarMenu addItem:self.donateItem];
     [self.sysBarMenu addItem:self.quitItem];
@@ -64,14 +64,14 @@
     [NSApp terminate:self];
 }
 -(void)authorize {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://account.app.net/oauth/authenticate?client_id=k3MDrXg8hfSUn8qzva7JXF4fBgp7E6zJ&response_type=token&redirect_uri=osxbroadcasts://&scope=basic%20public_messages"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://account.app.net/oauth/authenticate?client_id=k3MDrXg8hfSUn8qzva7JXF4fBgp7E6zJ&response_type=token&redirect_uri=osxbroadcasts://&scope=public_messages"]];
 }
 
 -(void)deauthorize {
     [self.prefs setObject:nil forKey:@"usertoken"];
     [self.prefs synchronize];
-    [self.sysBarMenu removeItem:self.deauthItem];
-    [self.sysBarMenu addItem:self.authItem];
+    self.authItem.title = @"Authorize";
+    self.authItem.action = @selector(authorize);
 }
 
 -(void)applicationWillFinishLaunching:(NSNotification *)notification {
@@ -84,8 +84,8 @@
     NSLog(@"%@", token);
     [self.prefs setObject:token forKey:@"usertoken"];
     [self.prefs synchronize];
-    [self.sysBarMenu removeItem:self.authItem];
-    [self.sysBarMenu addItem:self.deauthItem];
+    self.authItem.title = @"Deauthorize";
+    self.authItem.action = @selector(deauthorize);
     [self loadChannels];
 }
 
@@ -139,7 +139,7 @@
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:messageURL];
     req.HTTPMethod = @"GET";
     [req setValue:[NSString stringWithFormat:@"Bearer %@",
-                   [self.prefs objectForKey:@"usertoken"]] forHTTPHeaderField:@"Authorization"];
+                   [self.prefs objectForKey:@"usertoken"]] forHTTPHeaderField:@"Authorization"]; //I've found out how to do it without headers afterwards. Yay. Too lazy to change though
     NSURLResponse *response;
     NSError *error = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:req
@@ -167,17 +167,24 @@
             
         }
     }
+    //We have to do the check here since in userNotificationCenter:shouldPresentNotification: happily ignores the return value
+    bool shouldDisplay = YES;
+    for (NSUserNotification *n in [[NSUserNotificationCenter defaultUserNotificationCenter] deliveredNotifications]) {
+        if ([n.userInfo[@"url"] isEqualToString:url]) {
+            shouldDisplay = NO;
+        }
+    }
+    if (shouldDisplay) {
+        NSUserNotification *notification = [[NSUserNotification alloc] init];
+        notification.title = title;
+        notification.informativeText = subtitle;
+        notification.soundName = NSUserNotificationDefaultSoundName;
+        notification.hasActionButton = NO;
+        notification.userInfo = @{@"url": url};
+        notification.contentImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageURL]];
+        [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+    }
     
-    
-    NSUserNotification *notification = [[NSUserNotification alloc] init];
-    notification.title = title;
-    notification.informativeText = subtitle;
-    notification.soundName = NSUserNotificationDefaultSoundName;
-    notification.actionButtonTitle = @"View";
-    notification.hasActionButton = YES;
-    notification.userInfo = @{@"url": url};
-    notification.contentImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageURL]];
-    [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
 }
 
 @end

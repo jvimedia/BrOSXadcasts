@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "50E57496198ABDAD008D35B8"
-               BuildableName = "OSXBroadcasts.app"
-               BlueprintName = "OSXBroadcasts"
-               ReferencedContainer = "container:OSXBroadcasts.xcodeproj">
+               BuildableName = "BrOSXadcasts.app"
+               BlueprintName = "BrOSXadcasts"
+               ReferencedContainer = "container:BrOSXadcasts.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "50E574A9198ABDAD008D35B8"
-               BuildableName = "OSXBroadcastsTests.xctest"
-               BlueprintName = "OSXBroadcastsTests"
-               ReferencedContainer = "container:OSXBroadcasts.xcodeproj">
+               BuildableName = "BrOSXadcastsTests.xctest"
+               BlueprintName = "BrOSXadcastsTests"
+               ReferencedContainer = "container:BrOSXadcasts.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50E57496198ABDAD008D35B8"
-            BuildableName = "OSXBroadcasts.app"
-            BlueprintName = "OSXBroadcasts"
-            ReferencedContainer = "container:OSXBroadcasts.xcodeproj">
+            BuildableName = "BrOSXadcasts.app"
+            BlueprintName = "BrOSXadcasts"
+            ReferencedContainer = "container:BrOSXadcasts.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50E57496198ABDAD008D35B8"
-            BuildableName = "OSXBroadcasts.app"
-            BlueprintName = "OSXBroadcasts"
-            ReferencedContainer = "container:OSXBroadcasts.xcodeproj">
+            BuildableName = "BrOSXadcasts.app"
+            BlueprintName = "BrOSXadcasts"
+            ReferencedContainer = "container:BrOSXadcasts.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "50E57496198ABDAD008D35B8"
-            BuildableName = "OSXBroadcasts.app"
-            BlueprintName = "OSXBroadcasts"
-            ReferencedContainer = "container:OSXBroadcasts.xcodeproj">
+            BuildableName = "BrOSXadcasts.app"
+            BlueprintName = "BrOSXadcasts"
+            ReferencedContainer = "container:BrOSXadcasts.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
