@@ -27,6 +27,42 @@
 }
 -(void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:notification.userInfo[@"url"]]];
+    
+    //I _really_ should write a method that makes the requests to fight code duplication
+    
+    NSString *markerURL = @"https://api.app.net/posts/marker";
+    NSString *post = [NSString stringWithFormat:@"{ \"name\": \"channel:%d\", \"id\": \"%d\" }", [notification.userInfo[@"channel"] intValue], [notification.userInfo[@"id"] intValue]];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu",(unsigned long)[postData length]];
+    NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:markerURL]];
+    req.HTTPMethod = @"POST";
+    [req setValue:[NSString stringWithFormat:@"Bearer %@",
+                   [self.prefs objectForKey:@"usertoken"]] forHTTPHeaderField:@"Authorization"];
+    [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [req setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [req setHTTPBody:postData];
+    NSURLResponse *response;
+    NSError *error = nil;
+    [NSURLConnection sendSynchronousRequest:req
+                          returningResponse:&response
+                                      error:&error];
+    //I'll just ignore the server response for now, will change later and check for errors
+    
+    /*NSData *data = [NSURLConnection sendSynchronousRequest:req
+                                         returningResponse:&response
+                                                    error:&error];*/
+    /*if(error!=nil) {
+        NSLog(@"ADN Error:%@", error);
+    } else {
+        if (data != nil) {
+            NSError *jError = nil;
+            NSDictionary* json =[NSJSONSerialization
+                                 JSONObjectWithData:data
+                                 options:kNilOptions
+                                 error:&jError];
+        }
+    }*/
+
 }
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
@@ -96,7 +132,7 @@
 -(void)loadChannels {
     /*[self displayNotificationWithIDs:@[[NSNumber numberWithInt:39963],
                                        [NSNumber numberWithInt:4460197]]];*/
-    NSURL *channelURL = [NSURL URLWithString:@"https://api.app.net/channels"];
+    NSURL *channelURL = [NSURL URLWithString:@"https://api.app.net/channels?include_marker=1"];
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:channelURL];
     req.HTTPMethod = @"GET";
     [req setValue:[NSString stringWithFormat:@"Bearer %@",
@@ -115,14 +151,10 @@
                                  JSONObjectWithData:data
                                  options:kNilOptions
                                  error:&jError];
-
             for (NSDictionary *dict in json[@"data"]) {
                 bool newMessage = [((NSNumber *)dict[@"has_unread"]) boolValue] && [@"net.app.core.broadcast" isEqualToString:dict[@"type"]];
                 if (newMessage) {
                     [self performSelectorInBackground:@selector(displayNotificationWithIDs:) withObject:@[dict[@"id"], dict[@"recent_message_id"]]];
-                    /*NSLog(@"new messages");
-                    NSLog(@"%@", dict);
-                    NSLog(@"===============");*/
                 }
             }
             
@@ -180,7 +212,7 @@
         notification.informativeText = subtitle;
         notification.soundName = NSUserNotificationDefaultSoundName;
         notification.hasActionButton = NO;
-        notification.userInfo = @{@"url": url};
+        notification.userInfo = @{@"url": url, @"channel" : (NSNumber*)ids[0], @"id" : (NSNumber*)ids[1]};
         notification.contentImage = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:imageURL]];
         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
     }
