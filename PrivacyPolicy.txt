@@ -1,0 +1,1 @@
+BrOSXadcasts does not store any user related data. All info is loaded directly from App.net and will be processed immediately, without the need of storing anything except an authorization token.
