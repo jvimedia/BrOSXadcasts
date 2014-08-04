@@ -17,7 +17,6 @@
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification{
     
-    NSLog(@"New URL: %@", notification.userInfo[@"url"]);
     for (NSUserNotification *n in [center deliveredNotifications]) {
         if ([n.userInfo[@"url"] isEqualToString:notification.userInfo[@"url"]]) {
             return NO; //For some reason this won't work. It returns no but the notification will still display.
@@ -62,6 +61,7 @@
                                  error:&jError];
         }
     }*/
+    [center removeDeliveredNotification:notification];
 
 }
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -117,7 +117,6 @@
 - (void)handleAppleEvent:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
     NSString *urlString = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
     NSString *token = [urlString componentsSeparatedByString:@"access_token="][1];
-    NSLog(@"%@", token);
     [self.prefs setObject:token forKey:@"usertoken"];
     [self.prefs synchronize];
     self.authItem.title = @"Deauthorize";
@@ -195,8 +194,6 @@
                     title = d[@"value"][@"subject"];
                 }
             }
-            NSLog(@"New Broadcast: \n\tURL: %@, \n\tTitle: %@ \n\tSubtitle: %@, \n\timageURL: %@, \n\tmessageURL: %@\n===========", url, title, subtitle, imageURL, messageURL);
-            
         }
     }
     //We have to do the check here since in userNotificationCenter:shouldPresentNotification: happily ignores the return value
